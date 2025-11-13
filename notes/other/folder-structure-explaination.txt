@@ -1,0 +1,79 @@
+
+Root Structure (What You Have)
+    envs/
+    modules/
+    notes/
+    .gitignore
+    backend.md
+    backend.tf
+    main.tf
+    outputs.tf
+    provider.tf
+    README.md
+    variables.tf
+    versions.tf
+
+
+What each file/folder is normally used for
+
+    1. envs/
+        Separate environment configs
+            Example: dev, stage, prod Terraform workspaces
+        
+        Usually contains .tfvars files
+            dev.tfvars
+            prod.tfvars
+
+    2. modules/
+        Your reusable modules
+            Example folders:
+                vpc/
+                ecs/
+                rds/
+                apprunner/
+        Good modular design.
+
+
+    3. notes/
+        Anything non-Terraform: docs, diagrams, reference notes.
+
+    4. backend.tf
+        Stores remote backend config (S3, DynamoDB for locking)
+        Loads before anything else.
+
+    5. provider.tf
+        AWS provider setup
+            region
+            default tags
+            profiles (optional)
+
+    6. versions.tf
+        Terraform version lock
+        Provider version constraints
+            Example:
+                terraform {
+                    required_version = ">= 1.8.0"
+                    required_providers {
+                        aws = {
+                        source  = "hashicorp/aws"
+                        version = "~> 5.0"
+                        }
+                    }
+                }
+
+    7. variables.tf
+        All input variables with defaults / descriptions.
+
+    8. main.tf
+        Core resources or module calls (In production, this usually only calls modules)
+
+    9. outputs.tf
+        Anything you want to print after apply
+        Example: VPC ID, ALB DNS, ECS service URL.
+
+    10. README.md
+        Describes the project, setup, and usage steps.
+
+    11. backend.md
+        Documentation for backend configuration (just reference).
+
