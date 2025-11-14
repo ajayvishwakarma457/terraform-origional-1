@@ -13,6 +13,7 @@ terraform force-unlock <ID>
 terraform output
 terraform refresh
 terraform destroy -target=module.cloudfront
+terraform apply -target=module.cloudfront
 terraform state rm module.cloudfront
 terraform state list | grep cloudfront
 
