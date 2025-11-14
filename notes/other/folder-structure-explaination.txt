@@ -77,3 +77,48 @@ What each file/folder is normally used for
     11. backend.md
         Documentation for backend configuration (just reference).
 
+
+
+12 .Final Summary (Exact Order)
+
+    1. Backend config          (before loading state)
+    2. Terraform + Provider    (version + provider plugins)
+    3. Variables               (definitions)
+    4. Data sources            (external lookups)
+    5. Resources + Modules     (in dependency order, not file order)
+    6. Outputs                 (after apply)
+
+
+13. Terraform reads all .tf files (no order).
+
+    Terraform scans the folder and collects:
+        backend blocks
+        providers
+        variables
+        resources
+        outputs
+    It does not care about filenames.
+
+
+
+13. Before doing ANYTHING, Terraform processes the backend block FIRST.
+
+    Because Terraform must know:
+        where the state file lives
+        how to lock the state
+        whether to use S3, local, etc.
+    So the backend block (usually in backend.tf) is handled before all other blocks.
+    If backend fails → Terraform stops completely.
+
+
+14. After backend is initialized, Terraform processes everything else together.
+
+    Order does not matter.
+        provider.tf
+        versions.tf
+        variables.tf
+        main.tf
+        outputs.tf
+        modules/*
+    Terraform merges them into one configuration.
+
