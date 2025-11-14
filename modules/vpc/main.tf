@@ -154,3 +154,6 @@ resource "aws_vpc_endpoint" "dynamodb_gateway" {
     Name = "${var.project_name}-dynamodb-endpoint"
   })
 }
+
+
+
