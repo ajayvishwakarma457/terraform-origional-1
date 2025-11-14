@@ -53,7 +53,7 @@ Thumbs.db
 # Backend Terraform project (very important)
 # -----------------------------------
 backend/.terraform/
-backend/.terraform.lock.hcl
+# backend/.terraform.lock.hcl
 backend/terraform.tfstate
 backend/terraform.tfstate.*
 backend/*.tfplan
